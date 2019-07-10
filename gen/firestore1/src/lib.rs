@@ -541,6 +541,14 @@ pub struct Document {
 impl RequestValue for Document {}
 impl ResponseResult for Document {}
 
+impl std::cmp::PartialEq for Document {
+    fn eq(&self, other: &Self) -> bool {
+        self.name == other.name &&
+        self.fields == other.fields
+    }
+}
+
+
 
 /// An array value.
 /// 
@@ -554,6 +562,11 @@ pub struct ArrayValue {
 
 impl Part for ArrayValue {}
 
+impl std::cmp::PartialEq for ArrayValue {
+    fn eq(&self, other: &Self) -> bool {
+        self.values == other.values
+    }
+}
 
 /// The streamed response for Firestore.BatchGetDocuments.
 /// 
@@ -805,6 +818,21 @@ pub struct Value {
 
 impl Part for Value {}
 
+impl std::cmp::PartialEq for Value {
+    fn eq(&self, other: &Self) -> bool {
+        self.null_value == other.null_value &&
+        self.boolean_value == other.boolean_value &&
+        self.integer_value == other.integer_value &&
+        self.bytes_value == other.bytes_value &&
+        self.string_value == other.string_value &&
+        self.double_value == other.double_value &&
+        self.reference_value == other.reference_value &&
+        self.array_value == other.array_value &&
+        self.map_value == other.map_value &&
+        self.timestamp_value == other.timestamp_value &&
+        self.geo_point_value == other.geo_point_value
+    }
+}
 
 /// A filter.
 /// 
@@ -1452,6 +1480,11 @@ pub struct MapValue {
 
 impl Part for MapValue {}
 
+impl std::cmp::PartialEq for MapValue {
+    fn eq(&self, other: &Self) -> bool {
+        self.fields == other.fields
+    }
+}
 
 /// The request for Firestore.BatchGetDocuments.
 /// 
@@ -1988,6 +2021,12 @@ pub struct LatLng {
 
 impl Part for LatLng {}
 
+impl std::cmp::PartialEq for LatLng {
+    fn eq(&self, other: &Self) -> bool {
+        self.latitude == other.latitude &&
+        self.longitude == other.longitude
+    }
+}
 
 /// The index configuration for this field.
 /// 
